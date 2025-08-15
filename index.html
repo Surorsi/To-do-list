@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To-Do-List</title>
+  <meta name="description" content="A beautiful, animated, glassy to‑do app that works offline." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b0f1a" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Decorative background -->
+  <div class="bg">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+    <span class="grain"></span>
+  </div>
+
+  <!-- App Shell -->
+  <header class="app-header container">
+    <div class="brand">
+      <svg class="logo" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#8b5cf6"/>
+            <stop offset="1" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+        <rect x="1.5" y="1.5" width="21" height="21" rx="6" fill="url(#g1)" />
+        <path d="M8.5 12.2l2.5 2.5 4.5-4.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="titles">
+        <h1>TodoFlow</h1>
+        <p class="subtitle">Make it. Move it. Done.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main">
+    <!-- Composer -->
+    <section class="composer glass card" aria-labelledby="add-task-title">
+      <form id="newTaskForm" autocomplete="off" class="grid">
+        <input id="taskTitle" type="text" placeholder="What do you need to do?" required aria-label="Task title"/>
+        <input id="taskDue" type="date" aria-label="Due date" />
+        <select id="taskPriority" aria-label="Priority">
+          <option value="p1">High</option>
+          <option value="p2" selected>Medium</option>
+          <option value="p3">Low</option>
+        </select>
+        <button type="submit" class="btn primary">Add</button>
+      </form>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <div class="search glass">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks"/>
+      </div>
+      <div class="filters" role="tablist" aria-label="Filters">
+        <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="chip" data-filter="active" role="tab" aria-selected="false">Active</button>
+        <button class="chip" data-filter="completed" role="tab" aria-selected="false">Completed</button>
+        <button class="chip" data-filter="today" role="tab" aria-selected="false">Today</button>
+        <button class="chip" data-filter="overdue" role="tab" aria-selected="false">Overdue</button>
+        <button class="chip" data-filter="high" role="tab" aria-selected="false">High</button>
+      </div>
+    </section>
+
+    <!-- List -->
+    <section class="lists">
+      <div class="list-header">
+        <h2>Your tasks</h2>
+        <div class="list-actions">
+          <span id="count" class="muted">0 items</span>
+          <button id="clearCompleted" class="btn ghost danger">Clear completed</button>
+        </div>
+      </div>
+
+      <ul id="taskList" class="task-list" aria-live="polite"></ul>
+    </section>
+  </main>
+
+
+  <!-- Template -->
+  <template id="taskItemTemplate">
+    <li class="task glass" draggable="true">
+      <label class="checkbox">
+        <input type="checkbox" class="toggle" />
+        <span class="control"></span>
+      </label>
+      <div class="task-main">
+        <div class="title" contenteditable="true" spellcheck="false"></div>
+        <div class="meta">
+          <span class="due pill"></span>
+          <span class="priority pill"></span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button class="btn ghost small" data-action="duplicate" title="Duplicate">⎘</button>
+        <button class="btn ghost small danger" data-action="delete" title="Delete">✕</button>
+        <span class="drag-handle" title="Drag to reorder" aria-hidden="true">⋮⋮</span>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

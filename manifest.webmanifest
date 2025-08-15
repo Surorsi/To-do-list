@@ -1,0 +1,11 @@
+{
+  "name": "TodoFlow",
+  "short_name": "TodoFlow",
+  "display": "standalone",
+  "start_url": "./index.html",
+  "background_color": "#0b0f1a",
+  "theme_color": "#0b0f1a",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
